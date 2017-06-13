@@ -21,3 +21,7 @@ func NewMeta(api *auth0mgmt.Api) *Meta {
 func metaClientService(meta interface{}) *auth0client.Service {
 	return meta.(*Meta).ClientService
 }
+
+func metaRuleService(meta interface{}) *auth0rule.Service {
+	return meta.(*Meta).RuleService
+}
