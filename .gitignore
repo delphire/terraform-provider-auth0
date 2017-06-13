@@ -1,3 +1,4 @@
 **/*.tf
 **/*.tfstate
-**/*.tfstate.backup
+**/*.log
+**/*.backup
