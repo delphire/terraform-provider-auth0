@@ -28,7 +28,8 @@ func providerSchema() map[string]*schema.Schema {
 
 func providerResourcesMap() map[string]*schema.Resource {
 	return map[string]*schema.Resource{
-		"auth0_rule":   NewRuleResource(),
-		"auth0_client": NewClientResource(),
+		"auth0_rule":       NewRuleResource(),
+		"auth0_client":     NewClientResource(),
+		"auth0_connection": NewConnectionResource(),
 	}
 }
