@@ -213,42 +213,52 @@ func clientResourceDataFromClient(d *schema.ResourceData, c *auth0client.Client)
 func clientAddonsFromData(src []interface{}) *auth0client.Addons {
 	out := new(auth0client.Addons)
 	data := src[0].(map[string]interface{})
-	addon := func(key string) *map[string]interface{} {
+
+	addon := func(key string) (*map[string]interface{}, bool) {
 		if raw, ok := data[key]; ok {
-			val := raw.(map[string]interface{})
-			return &val
+			if val, ok := raw.(map[string]interface{}); ok {
+				return &val, true
+			} else {
+				return nil, false
+			}
 		} else {
-			return nil
+			return nil, false
 		}
 	}
 
-	out.Aws = addon("aws")
-	out.Firebase = addon("firebase")
-	out.AzureBlob = addon("azure_blob")
-	out.AzureSb = addon("azure_sb")
-	out.Rms = addon("rms")
-	out.MsCrm = addon("mscrm")
-	out.Slack = addon("slack")
-	out.Box = addon("box")
-	out.CloudBees = addon("cloudbees")
-	out.Concur = addon("concur")
-	out.Dropbox = addon("dropbox")
-	out.EchoSign = addon("echosign")
-	out.Egnyte = addon("egnyte")
-	out.NewRelic = addon("newrelic")
-	out.Office365 = addon("office365")
-	out.Salesforce = addon("salesforce")
-	out.SalesforceApi = addon("salesforce_api")
-	out.SalesforceSandboxApi = addon("salesforce_sandbox_api")
-	out.SamlP = addon("samlp")
-	out.Layer = addon("layer")
-	out.SapApi = addon("sap_api")
-	out.SharePoint = addon("sharepoint")
-	out.SpringCm = addon("springcm")
-	out.Wams = addon("wams")
-	out.WsFed = addon("wsfed")
-	out.Zendesk = addon("zendesk")
-	out.Zoom = addon("zoom")
+	if val, ok := addon("aws"); ok {
+		out.Aws = val
+	}
+
+	if val, ok := addon("firebase"); ok {
+		out.Firebase = val
+	}
+
+	// out.AzureBlob = addon("azure_blob")
+	// out.AzureSb = addon("azure_sb")
+	// out.Rms = addon("rms")
+	// out.MsCrm = addon("mscrm")
+	// out.Slack = addon("slack")
+	// out.Box = addon("box")
+	// out.CloudBees = addon("cloudbees")
+	// out.Concur = addon("concur")
+	// out.Dropbox = addon("dropbox")
+	// out.EchoSign = addon("echosign")
+	// out.Egnyte = addon("egnyte")
+	// out.NewRelic = addon("newrelic")
+	// out.Office365 = addon("office365")
+	// out.Salesforce = addon("salesforce")
+	// out.SalesforceApi = addon("salesforce_api")
+	// out.SalesforceSandboxApi = addon("salesforce_sandbox_api")
+	// out.SamlP = addon("samlp")
+	// out.Layer = addon("layer")
+	// out.SapApi = addon("sap_api")
+	// out.SharePoint = addon("sharepoint")
+	// out.SpringCm = addon("springcm")
+	// out.Wams = addon("wams")
+	// out.WsFed = addon("wsfed")
+	// out.Zendesk = addon("zendesk")
+	// out.Zoom = addon("zoom")
 
 	return out
 }
